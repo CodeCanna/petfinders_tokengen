@@ -59,6 +59,7 @@ done
 # Generate the token, then store it in a file.  Display the file, then exit.
 curl -d "grant_type=client_credentials&client_id=$id&client_secret=$secret" 'https://api.petfinder.com/v2/oauth2/token' > "$OUTPUT_DIR/token.json";
 
+# Cat out token.json piping it through jq if it's installed
 if jq_is_installed; then
     cat "$OUTPUT_DIR/token.json" | jq;
 else
