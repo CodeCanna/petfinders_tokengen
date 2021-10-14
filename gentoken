@@ -3,22 +3,15 @@
 # Define our variables
 OUTPUT_DIR=/home/$USER/Documents;
 
-# Check our arguments
-if [ $# -eq 0 ]; then
-    echo "Not enough args supplied.";
-    exit 1;
-fi
-
 # Check that jq is installed
 function jq_is_installed {
-    if ! jq --version; then
+    if ! jq --version > /dev/null; then
         return 1;
     fi
     return 0;
 }
 
 function print_help {
-    clear;
     echo '-- Usage --';
     echo '-i = Client ID also this is also referred to as the API key.';
     echo '-s = This is the secret that has to be pass with the api key to generate a token.';
@@ -27,6 +20,17 @@ function print_help {
     echo '     ## Generate a token ##     ';
     echo 'EAMPLE: ./gentoken -i [API Key] -s [Secret]';
 }
+
+# Check our arguments
+if [ $# -eq 0 ]; then
+    echo "Not enough arguments supplied.";
+    print_help;
+    exit 1;
+elif [ $# -gt 4 ]; then
+    echo "Too many arguments supplied"
+    print_help;
+    exit 3;
+fi
 
 # Define the opt string to loop through with getopts
 optstring=":hi:s:";
@@ -62,4 +66,4 @@ else
     echo 'Consider installing jq (https://github.com/stedolan/jq) to get prettier JSON output';
 fi
 
-echo "Exitting...";
+exit 0;
