@@ -9,6 +9,14 @@ if [ $# -eq 0 ]; then
     exit 1;
 fi
 
+# Check that jq is installed
+function jq_is_installed {
+    if ! jq --version; then
+        return 1;
+    fi
+    return 0;
+}
+
 function print_help {
     clear;
     echo '-- Usage --';
@@ -46,6 +54,12 @@ done
 
 # Generate the token, then store it in a file.  Display the file, then exit.
 curl -d "grant_type=client_credentials&client_id=$id&client_secret=$secret" 'https://api.petfinder.com/v2/oauth2/token' > "$OUTPUT_DIR/token.json";
-cat "$OUTPUT_DIR/token.json" | jq;
+
+if jq_is_installed; then
+    cat "$OUTPUT_DIR/token.json" | jq;
+else
+    cat "$OUTPUT_DIR/token.json";
+    echo 'Consider installing jq (https://github.com/stedolan/jq) to get prettier JSON output';
+fi
 
 echo "Exitting...";
