@@ -1,4 +1,4 @@
-# petfinders_tokengen
+# Petfinder API token generator
 
 This is a simple script to generate Petfinder API Authorization Tokens.  I wrote it to keep my sanity so I didn't have to keep copying and pasting the code to generate a new token.
 
