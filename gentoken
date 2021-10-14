@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Define our variables
+OUTPUT_DIR=/home/$USER/Documents;
+
+# Check our arguments
+if [ $# -eq 0 ]; then
+    echo "Not enough args supplied.";
+    exit 1;
+fi
+
+function print_help {
+    clear;
+    echo '-- Usage --';
+    echo '-i = Client ID also this is also referred to as the API key.';
+    echo '-s = This is the secret that has to be pass with the api key to generate a token.';
+    echo '-h = Prints this help message';
+    echo '';
+    echo '     ## Generate a token ##     ';
+    echo 'EAMPLE: ./gentoken -i [API Key] -s [Secret]';
+}
+
+# Define the opt string to loop through with getopts
+optstring=":hi:s:";
+
+# Parse our arguments with getopts
+while getopts ${optstring} args; do
+    case "${args}" in
+        i)
+            id="${OPTARG}";
+        ;;
+        s)
+            secret="${OPTARG}";
+        ;;
+        h)
+            print_help;
+            exit 0;
+        ;;
+        ?)
+            echo "Invlid option: - ${OPTARG}";
+            print_help;
+            exit 1;
+        ;;
+    esac
+done
+
+# Generate the token, then store it in a file.  Display the file, then exit.
+curl -d "grant_type=client_credentials&client_id=$id&client_secret=$secret" 'https://api.petfinder.com/v2/oauth2/token' > "$OUTPUT_DIR/token.json";
+cat "$OUTPUT_DIR/token.json" | jq;
+
+echo "Exitting...";
