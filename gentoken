@@ -25,7 +25,7 @@ function print_help {
 if [ $# -eq 0 ]; then
     echo "Not enough arguments supplied.";
     print_help;
-    exit 1;
+    exit 3;
 elif [ $# -gt 4 ]; then
     echo "Too many arguments supplied"
     print_help;
