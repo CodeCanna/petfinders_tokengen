@@ -3,16 +3,15 @@
 This is a simple script to generate Petfinder API Authorization Tokens.  I wrote it to keep my sanity so I didn't have to keep copying and pasting the code to generate a new token.
 
 ## Dependencies
-* Cat
-* [jq](https://github.com/stedolan/jq)
+* cat
+* [jq](https://github.com/stedolan/jq) (JSON Pretty Print)
 
 ## How to use
 * Run the installer `sudo ./install`
-* Try generating a key `gentoken -i [API KEY] -s [SECRET]` or try `gentoken -h` to see help
+* Try generating a key `gentoken -i [YOUR API KEY] -s [YOUR SECRET]` or try `gentoken -h` to see help
 * Done!
 
-To request a key visit [here](https://www.petfinder.com/developers/) to learn more about requesting an API key.
-An API key and secret are required for this script to work, and for you to have access to the Perfinder api.
+You have to request and API key and Secret from Pet Finder.  To request a key visit [here](https://www.petfinder.com/developers/) to learn more about requesting an API key.  An API key and secret are required for this script to work, and for you to have access to the Perfinder api.
 
 ### Example
 > ./gentoken -i YOUR API KEY HERE -s YOUR SECRET HERE
