@@ -12,14 +12,14 @@ function jq_is_installed {
 }
 
 function print_help {
-    echo '-- Usage ------------------------------------------------------------------------';
-    echo '-i = Client ID also this is also referred to as the API key.                     ';
-    echo '-s = This is the secret that has to be pass with the api key to generate a token.';
-    echo '-h = Prints this help message                                                    ';
-    echo '                                                                                 ';
-    echo '       ## Generate a token ##                                                    ';
-    echo 'EAMPLE: ./gentoken -i [API Key] -s [Secret]                                      ';
-    echo '---------------------------------------------------------------------------------';
+    echo '+---------------------------------- Usage -----------------------------------------+';
+    echo '| -i = Client ID also this is also referred to as the API key.                     |';
+    echo '| -s = This is the secret that has to be pass with the api key to generate a token.|';
+    echo '| -h = Prints this help message                                                    |';
+    echo '|                                                                                  |';
+    echo '|       ## Generate a token ##                                                     |';
+    echo '| EAMPLE: ./gentoken -i [API Key] -s [Secret]                                      |';
+    echo '+----------------------------------------------------------------------------------+';
 }
 
 # Check our arguments
@@ -67,5 +67,3 @@ else
     cat "$OUTPUT_DIR/token.json";
     echo 'Consider installing jq (https://github.com/stedolan/jq) to get prettier JSON output';
 fi
-
-exit 0;
