@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+function install {
+    # Copy the gentoken file
+    if ! cp ./gentoken "$INSTALL_DIR"; then
+        echo "There was a problem copying ./gentoken to $INSTALL_DIR";
+        return 1;
+    fi
+}
+
+# Ensure this script is ran as root
+if [ "$USER" != 'root' ]; then
+    echo 'This script must be ran as root, try [sudo ./install]';
+    exit 1;
+fi
+
+INSTALL_DIR=/usr/bin;
+
+if [ "$#" -gt 0 ]; then
+    case ${@} in
+        '--reinstall')
+            if ! install; then
+                echo 'There was a problem re-installing the script!'
+                exit "$?";
+            fi
+        ;;
+    esac
+fi
+
+if ! install; then
+    echo "Couldn't install script, check the permissions in $INSTALL_DIR";
+fi
+
+echo 'Install Successful!';
